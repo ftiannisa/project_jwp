@@ -1,8 +1,6 @@
 <?php
 require_once 'templates/config/db_connection.php';
 
-error_reporting(0);
-
 session_start();
 
 if (isset($_SESSION['name'])) {
@@ -23,7 +21,6 @@ if (isset($_POST['login'])) {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        echo "<script>alert('LOGIN BERHASIL.')</script>";
         $row = $result->fetch_assoc();
         $_SESSION['name'] = $row['nama'];
         header("Location: dashboard.php");
