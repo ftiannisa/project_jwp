@@ -36,6 +36,9 @@ $activeMenu = isset($_GET['menu']) ? $_GET['menu'] : 'menu_daftar_artikel';
       rel="stylesheet"
     />
 
+    <!-- text editor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+
     <!-- favicon -->
     <link
       rel="shortcut icon"
@@ -85,7 +88,7 @@ $activeMenu = isset($_GET['menu']) ? $_GET['menu'] : 'menu_daftar_artikel';
             </div>
             <div class="mb-3">
               <!-- new post -->
-              <a href="#">
+              <a href="?menu=menu_add_post">
                 <button
                   type="button"
                   class="btn btn-light pt-3 pb-3 ps-5 pe-5 rounded-pill"
@@ -207,11 +210,14 @@ $activeMenu = isset($_GET['menu']) ? $_GET['menu'] : 'menu_daftar_artikel';
           </div>
         </div>
         <!-- content -->
-        <div class="col py-3 text-center">
+        <div class="col py-3">
           <?php switch ($activeMenu) {
+            case "menu_add_post":
+              include('artikel/insert.php');
+              break;
             case "menu_daftar_artikel":
               //code
-              include('templates/no_entry.php');
+              //include('templates/no_entry.php');
               break;
             default:
               //code
@@ -225,5 +231,8 @@ $activeMenu = isset($_GET['menu']) ? $_GET['menu'] : 'menu_daftar_artikel';
     <?php
     include('templates/footer.php');
     ?>
+
+    <!-- custom script -->
+    <script src="templates/js/script.js"></script>
   </body>
 </html>
