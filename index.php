@@ -1,5 +1,13 @@
 <?php
+require_once 'templates/config/db_connection.php';
+
 session_start();
+
+// get data artikel
+$query = "SELECT t_artikel.*, t_admin.nama FROM t_artikel JOIN t_admin ON t_artikel.id_admin = t_admin.id_admin LIMIT 3";
+$stmt = $connection->prepare($query);
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
 
 <!-- layout -->
@@ -24,6 +32,12 @@ session_start();
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Bootstrap Icons CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
 
     <!-- favicon -->
     <link
@@ -125,59 +139,26 @@ session_start();
     <div class="p-5">
       <h2>MADING POPULER</h2>
       <div class="card-group">
+        <?php if ($result->num_rows > 0): ?>
+        <?php foreach ($result as $row): ?>
         <div class="card">
           <img
-            src="https://getbootstrap.com/docs/5.3/assets/img/bootstrap-icons.png"
+            src="<?php echo $row['gambar']; ?>"
             class="card-img-top h-75"
             alt="..."
           />
           <div class="card-body">
-            <h5 class="card-title">Web Framework: Bootstrap 5</h5>
-            <p class="card-text">
-              This is a wider card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
+            <h5 class="card-title"><?php echo $row['judul_artikel']; ?></h5>
           </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
+          <div class="card-footer text-muted">
+            <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
+            <i class="bi bi-person-circle"></i>
+            <small><?php echo $row['nama']; ?></small>
           </div>
         </div>
-        <div class="card">
-          <img
-            src="https://developer.android.com/static/codelabs/jetpack-compose-animation/img/5bb2e531a22c7de0.png"
-            class="card-img-top h-75"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Android UI Toolkit: Jetpack Compose</h5>
-            <p class="card-text">
-              This card has supporting text below as a natural lead-in to
-              additional content.
-            </p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
-        </div>
-        <div class="card">
-          <img
-            src="https://www.anti-malware.ru/files/styles/amp_image/public/images/source/kali_linux_2022.3_news.png"
-            class="card-img-top h-75"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Basic Cyber Security #1: Kali Linux</h5>
-            <p class="card-text">
-              This is a wider card with supporting text below as a natural
-              lead-in to additional content. This card has even longer content
-              than the first to show that equal height action.
-            </p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
-        </div>
+        <?php endforeach; ?>
+        <?php else: include('templates/no_entry.php'); ?>
+        <?php endif; ?>
       </div>
     </div>
 
