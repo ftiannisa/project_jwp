@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $_SESSION['name'] = $row['nama'];
-        $_SERVER['id_adm'] = $row['id_admin'];
+        $_SESSION['id_adm'] = $row['id_admin'];
         header("Location: dashboard.php");
     } else {
         echo "<script>alert('LOGIN GAGAL. Silakan coba lagi')</script>";
