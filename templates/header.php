@@ -1,11 +1,17 @@
 <?php
 $homeUrl = 'index.php';
+$logoUrl = $homeUrl;
 $btnUrl = 'login.php';
 $btnText = 'LOGIN';
 $btnClass = "btn btn-outline-primary";
 
-if (isset($_SESSION['name'])) {
+$activePage = basename($_SERVER['PHP_SELF']);
+if ($activePage === 'dashboard.php') {
   $homeUrl = 'dashboard.php';
+}
+
+if (isset($_SESSION['name'])) {
+  $logoUrl = 'dashboard.php';
   $btnUrl = 'logout.php';
   $btnText = 'LOGOUT';
   $btnClass = "btn btn-danger";
@@ -37,7 +43,7 @@ if (isset($_SESSION['name'])) {
           <!-- school logo -->
           <a
             class="navbar-brand d-flex align-items-center"
-            href="<?php echo $homeUrl; ?>"
+            href="<?php echo $logoUrl; ?>"
           >
             <img
               src="https://img.icons8.com/stickers/100/module.png"
