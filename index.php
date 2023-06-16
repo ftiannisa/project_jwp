@@ -4,7 +4,7 @@ require_once 'templates/config/db_connection.php';
 session_start();
 
 // get data artikel
-$query = "SELECT t_artikel.*, t_admin.nama FROM t_artikel JOIN t_admin ON t_artikel.id_admin = t_admin.id_admin LIMIT 3";
+$query = "SELECT a.*, COUNT(k.id_komentar) AS jumlah_komentar, admin.nama FROM t_artikel AS a LEFT JOIN t_komentar AS k ON a.id_artikel = k.id_artikel INNER JOIN t_admin AS admin ON a.id_admin = admin.id_admin GROUP BY a.id_artikel ORDER BY jumlah_komentar DESC LIMIT 3";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -150,10 +150,15 @@ $result = $stmt->get_result();
           <div class="card-body">
             <h5 class="card-title"><?php echo $row['judul_artikel']; ?></h5>
           </div>
-          <div class="card-footer text-muted">
-            <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
-            <i class="bi bi-person-circle"></i>
-            <small><?php echo $row['nama']; ?></small>
+          <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-person-circle"></i>
+              <small><?php echo $row['nama']; ?></small>
+            </div>
+            <div>
+              <i class="bi bi-chat-right"></i>
+              <small><?php echo $row['jumlah_komentar']; ?></small>
+            </div>
           </div>
         </div>
         <?php endforeach; ?>
