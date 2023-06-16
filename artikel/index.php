@@ -5,7 +5,7 @@ if (!isset($_SESSION['name'])) {
     header("Location: index.php");
 }
 
-$query = "SELECT t_artikel.*, t_admin.nama FROM t_artikel JOIN t_admin ON t_artikel.id_admin = t_admin.id_admin";
+$query = "SELECT t_artikel.*, t_admin.nama FROM t_artikel JOIN t_admin ON t_artikel.id_admin = t_admin.id_admin ORDER BY id_artikel DESC";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
