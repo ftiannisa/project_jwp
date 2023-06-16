@@ -1,7 +1,7 @@
 <?php
-$homeUrl = 'index.php';
+$homeUrl = '/project_jwp/index.php';
 $logoUrl = $homeUrl;
-$btnUrl = 'login.php';
+$btnUrl = '/project_jwp/login.php';
 $btnText = 'LOGIN';
 $btnClass = "btn btn-outline-primary";
 
@@ -11,7 +11,7 @@ if ($activePage === 'dashboard.php') {
 }
 
 if (isset($_SESSION['name'])) {
-  $logoUrl = 'dashboard.php';
+  $logoUrl = '/project_jwp/dashboard.php';
   $btnUrl = 'logout.php';
   $btnText = 'LOGOUT';
   $btnClass = "btn btn-danger";
@@ -65,10 +65,10 @@ if (isset($_SESSION['name'])) {
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">PROFIL</a>
+              <a class="nav-link" href="/project_jwp/profil.php">PROFIL</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">ARTIKEL</a>
+              <a class="nav-link" href="/project_jwp/artikel">ARTIKEL</a>
             </li>
             <li class="nav-item">
               <a href="" class="nav-link"></a>
