@@ -27,5 +27,3 @@ if ($result->num_rows > 0) {
 }
 
 ?>
-
-<html>HALO</html>
