@@ -61,7 +61,6 @@ if (isset($_POST['upload'])) {
     <title>Document</title>
   </head>
   <body>
-    <!-- <div class="d-flex"> -->
     <div class="p-3 h5" style="width: 100%">
       <form method="post">
         <div class="form-group mb-3">
@@ -97,7 +96,6 @@ if (isset($_POST['upload'])) {
         </div>
       </form>
     </div>
-    <!-- </div> -->
 
     <!-- custom script -->
     <script src="../templates/js/script.js"></script>
