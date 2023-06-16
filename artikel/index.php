@@ -1,24 +1,36 @@
 <?php
-require_once 'templates/config/db_connection.php';
+require_once '../templates/config/db_connection.php';
 
-if (!isset($_SESSION['name'])) {
-    header("Location: index.php");
-}
+session_start();
 
-$query = "SELECT t_artikel.*, t_admin.nama FROM t_artikel JOIN t_admin ON t_artikel.id_admin = t_admin.id_admin ORDER BY id_artikel DESC";
+// get data artikel
+$query = "SELECT a.*, COUNT(k.id_komentar) AS jumlah_komentar, admin.nama FROM t_artikel AS a LEFT JOIN t_komentar AS k ON a.id_artikel = k.id_artikel INNER JOIN t_admin AS admin ON a.id_admin = admin.id_admin GROUP BY a.id_artikel ORDER BY jumlah_komentar DESC LIMIT 3";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
+
+// if ($result->num_rows > 0) {
+//     // delete data
+//     echo "<script>alert('DATA BERHASIL DIHAPUS')</script>";
+//     $query = "DELETE FROM t_artikel WHERE id_artikel=?";
+//     $stmt = $connection->prepare($query);
+//     $stmt->bind_param("i", $id_artikel);
+//     $stmt->execute();
+//     header("Location: ../dashboard.php");
+// } else {
+//     echo "<script>alert('GAGAL MENGHAPUS DATA')</script>";
+// }
+
 ?>
 
 <!-- layout -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="templates/css/style.css" />
+    <link rel="stylesheet" href="../templates/css/style.css" />
 
     <!-- Bootstrap CSS -->
     <link
@@ -33,6 +45,12 @@ $result = $stmt->get_result();
       crossorigin="anonymous"
     ></script>
 
+    <!-- Bootstrap Icons CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
     <!-- favicon -->
     <link
       rel="shortcut icon"
@@ -40,48 +58,71 @@ $result = $stmt->get_result();
       type="image/x-icon"
     />
 
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="p-3" style="width: 100%">
-      <table class="table table-warning table-striped table-hover">
-        <thead>
-          <tr>
-            <th scope="col" style="width: 10%">#</th>
-            <th scope="col" style="width: 60%">Title</th>
-            <th scope="col" style="width: 20%">Author</th>
-            <th scope="col" style="width: 10%">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php if ($result->num_rows > 0): ?>
-          <?php foreach ($result as $row): ?>
-          <tr>
-            <th scope="row">
+    <title>Mading Online JeWePe | Artikel</title>
+</head>
+<body style="background-color: #fffee6">
+    <!-- header -->
+    <?php
+    include('../templates/header.php');
+    ?>
+
+    <!-- content -->
+    <div class="container mb-5">
+      <!-- judul -->
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h2 class="poppins">ARTIKEL</h2>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <?php if ($result->num_rows > 0): ?>
+        <?php foreach ($result as $row): ?>
+
+        <div class="col-4 mb-4">
+          <a href="#" class="text-decoration-none text-dark">
+            <div class="card" style="height: 550px;">
               <img
                 src="<?php echo $row['gambar']; ?>"
-                width="75"
-                height="75"
-                class="img-thumbnail"
-                onerror="this.onerror=null; this.src='./templates/img/picture.png';"
+                class="card-img-top h-75"
               />
-            </th>
-            <td><?php echo $row['judul_artikel']; ?></td>
-            <td><?php echo $row['nama']; ?></td>
-            <td>
-              <a href="./artikel/delete.php?id_artikel=<?php echo $row['id_artikel']; ?>"
-              onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                ><button name="hapus_post" class="btn btn-danger poppins">
-                  HAPUS
-                </button>
-              </a>
-            </td>
-          </tr>
-          <?php endforeach; ?>
-          <?php else: include('templates/no_entry.php'); ?>
-          <?php endif; ?>
-        </tbody>
-      </table>
+              <div class="card-body">
+                <h5 class="card-title"><?php echo $row['judul_artikel']; ?></h5>
+                <p class="card-text">
+                <?php
+                $data = $row['isi_artikel'];
+                $plaintext = strip_tags($data);
+                $end_sentence = strpos($plaintext, '.');
+                $end_sentence = ($end_sentence !== false) ? $end_sentence : strlen($plaintext);
+                $first_sentence = substr($plaintext, 0, $end_sentence + 1);
+                echo $first_sentence;
+                ?>
+                </p>
+              </div>
+              <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="bi bi-person-circle"></i>
+                  <small><?php echo $row['nama']; ?></small>
+                </div>
+                <div>
+                  <i class="bi bi-chat-right"></i>
+                  <small><?php echo $row['jumlah_komentar']; ?></small>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <?php endforeach; ?>
+        <?php else: include('templates/no_entry.php'); ?>
+        <?php endif; ?>
+
+      </div>
     </div>
-  </body>
+
+    <!-- footer -->
+    <?php
+    include('../templates/footer.php');
+    ?>
+</body>
 </html>

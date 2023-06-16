@@ -11,6 +11,14 @@ hr {
   max-width: 75px;
 }
 
+.card:hover {
+  background: #fcaf24;
+  border-color: #ffdb00;
+  border-width: 3px;
+  transition: all ease-in-out 0.3s;
+  color: white;
+}
+
 .logo-text {
   font-family: "Ubuntu", Arial;
 }
