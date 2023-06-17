@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+<!-- layout -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
