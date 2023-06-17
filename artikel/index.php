@@ -80,7 +80,7 @@ $result = $stmt->get_result();
         <?php foreach ($result as $row): ?>
 
         <div class="col-4 mb-4">
-          <a href="#" class="text-decoration-none text-dark">
+          <a href="detail.php?id_artikel=<?php echo $row['id_artikel']; ?>" class="text-decoration-none text-dark">
             <div class="card" style="height: 550px;">
               <img
                 src="<?php echo $row['gambar']; ?>"
