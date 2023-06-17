@@ -92,6 +92,7 @@ if (isset($_POST['login'])) {
                 class="form-control form-control-lg bg-light fs-6"
                 name="email"
                 placeholder="name@example.com"
+                required
               />
             </div>
             <p class="poppins">Password</p>
@@ -101,6 +102,7 @@ if (isset($_POST['login'])) {
                 class="form-control form-control-lg bg-light fs-6"
                 name="password"
                 placeholder="********"
+                required
               />
             </div>
             <!-- <div class="input-group mb-5 d-flex justify-content-between">
