@@ -218,6 +218,9 @@ $activeMenu = isset($_GET['menu']) ? $_GET['menu'] : 'menu_daftar_artikel';
             case "menu_daftar_artikel":
               include('artikel/list_artikel.php');
               break;
+            case "menu_laporan":
+              include('laporan.php');
+              break;
             case "menu_komentar":
               include('komentar/list_komentar.php');
               break;
