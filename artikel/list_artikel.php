@@ -66,7 +66,11 @@ $result = $stmt->get_result();
                 onerror="this.onerror=null; this.src='./templates/img/picture.png';"
               />
             </th>
-            <td><?php echo $row['judul_artikel']; ?></td>
+            <td>
+              <a href="/project_jwp/artikel/detail.php?id_artikel=<?php echo $row['id_artikel']; ?>" class="text-decoration-none text-dark">
+                <?php echo $row['judul_artikel']; ?>
+              </a>
+            </td>
             <td><?php echo $row['nama']; ?></td>
             <td>
               <a href="./artikel/delete.php?id_artikel=<?php echo $row['id_artikel']; ?>"
