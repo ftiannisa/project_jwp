@@ -174,6 +174,50 @@ $result = $stmt->get_result();
       </div>
     </div>
 
+    <!-- card mading terbaru -->
+    <div class="p-5">
+      <div class="d-flex justify-content-between">
+        <h2 class="poppins">MADING TERBARU</h2>
+        <a class="icon-link icon-link-hover poppins" href="artikel">Lihat Semua Mading
+        <i class="bi bi-arrow-right" style="font-size: large;"></i>
+        </a>
+      </div>
+      <div class="card-group">
+        <?php
+        $query = "SELECT a.*, COUNT(k.id_komentar) AS jumlah_komentar, admin.nama FROM t_artikel AS a LEFT JOIN t_komentar AS k ON a.id_artikel = k.id_artikel INNER JOIN t_admin AS admin ON a.id_admin = admin.id_admin GROUP BY a.id_artikel ORDER BY a.id_artikel DESC LIMIT 3";
+        $stmt = $connection->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0): ?>
+        <?php foreach ($result as $row): ?>
+        <div class="card">
+          <img
+            src="<?php echo $row['gambar']; ?>"
+            class="card-img-top h-75"
+            alt="..."
+            onerror="this.onerror=null; this.src='./templates/img/picture.png';"
+          />
+          <div class="card-body">
+            <h5 class="card-title"><?php echo $row['judul_artikel']; ?></h5>
+            <a href="artikel/detail.php?id_artikel=<?php echo $row['id_artikel']; ?>" class="text-decoration-none text-dark stretched-link text-muted">Lihat Artikel >></a>
+          </div>
+          <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-person-circle"></i>
+              <small><?php echo $row['nama']; ?></small>
+            </div>
+            <div>
+              <i class="bi bi-chat-right"></i>
+              <small><?php echo $row['jumlah_komentar']; ?></small>
+            </div>
+          </div>
+        </div>
+        <?php endforeach; ?>
+        <?php else: include('templates/no_entry.php'); ?>
+        <?php endif; ?>
+      </div>
+    </div>
+
     <!-- footer -->
     <?php
     include('templates/footer.php');
