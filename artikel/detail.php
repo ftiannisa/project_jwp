@@ -76,7 +76,7 @@ $result = $stmt->get_result();
         <h1 mb-5><?php echo $row['judul_artikel']; ?></h1>
         <p class="text-muted">oleh <?php echo $row['nama']; ?></p>
         <br>
-        <img src="<?php echo $row['gambar']; ?>" class="img-thumbnail" style="height: 300px;">
+        <img src="<?php echo $row['gambar']; ?>" class="img-thumbnail" style="height: 300px;" onerror="this.onerror=null; this.src='../templates/img/picture.png';">
       </div>
     </div>
 

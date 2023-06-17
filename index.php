@@ -151,6 +151,7 @@ $result = $stmt->get_result();
             src="<?php echo $row['gambar']; ?>"
             class="card-img-top h-75"
             alt="..."
+            onerror="this.onerror=null; this.src='./templates/img/picture.png';"
           />
           <div class="card-body">
             <h5 class="card-title"><?php echo $row['judul_artikel']; ?></h5>
