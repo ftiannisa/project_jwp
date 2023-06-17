@@ -111,7 +111,7 @@ $result = $stmt->get_result();
         </div>
 
         <?php endforeach; ?>
-        <?php else: include('templates/no_entry.php'); ?>
+        <?php else: include('../templates/no_entry.php'); ?>
         <?php endif; ?>
 
       </div>
