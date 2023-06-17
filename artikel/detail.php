@@ -111,7 +111,7 @@ $result = $stmt->get_result();
         <!-- post komentar -->
         <div class="d-flex pt-2 col justify-content-start">
           <i class="bi bi-person-circle me-3" style="font-size: 70px;"></i>
-          <form method="post">
+          <form method="post" action="../komentar/insert.php?id_artikel=<?php echo $id_artikel; ?>">
             <div class="input-group mb-3">
               <input
                 type="text"
