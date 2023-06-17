@@ -137,7 +137,12 @@ $result = $stmt->get_result();
 
     <!-- card mading populer -->
     <div class="p-5">
-      <h2>MADING POPULER</h2>
+      <div class="d-flex justify-content-between">
+        <h2 class="poppins">MADING POPULER</h2>
+        <a class="icon-link icon-link-hover poppins" href="artikel">Lihat Semua Mading
+        <i class="bi bi-arrow-right" style="font-size: large;"></i>
+        </a>
+      </div>
       <div class="card-group">
         <?php if ($result->num_rows > 0): ?>
         <?php foreach ($result as $row): ?>
@@ -149,6 +154,7 @@ $result = $stmt->get_result();
           />
           <div class="card-body">
             <h5 class="card-title"><?php echo $row['judul_artikel']; ?></h5>
+            <a href="artikel/detail.php?id_artikel=<?php echo $row['id_artikel']; ?>" class="text-decoration-none text-dark stretched-link text-muted">Lihat Artikel >></a>
           </div>
           <div class="card-footer text-muted d-flex justify-content-between align-items-center">
             <div>
