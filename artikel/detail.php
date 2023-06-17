@@ -106,7 +106,7 @@ $result = $stmt->get_result();
     </div>
 
     <!-- comment section -->
-    <div class="container w-75">
+    <div class="container w-75" id="comment_section">
       <div class="row">
         <!-- post komentar -->
         <div class="d-flex pt-2 col justify-content-start">

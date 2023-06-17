@@ -12,5 +12,5 @@ if (isset($_POST['post_komentar'])) {
     $stmt->bind_param("isss", $id_artikel, $nama_user, $email_user, $isi_komentar);
     $stmt->execute();
     echo "<script>alert('Komentar berhasil dikirim.')</script>";
-    header("Location: ../artikel/detail.php?id_artikel=" . $id_artikel);
+    header("Location: ../artikel/detail.php?id_artikel=" . $id_artikel . "#comment_section");
 }
