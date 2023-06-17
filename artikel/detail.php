@@ -152,6 +152,7 @@ $result = $stmt->get_result();
             foreach ($result as $row) {
               $tanggal = $row['tanggal_komentar'];
               $tanggal_baru = date('d-m-Y', strtotime($tanggal));
+              $tanggal_baru = str_replace('-', '/', $tanggal_baru);
               echo '
               <div class="d-flex flex-row mb-3">
                 <i class="bi bi-person-circle me-3" style="font-size: 30px;"></i>

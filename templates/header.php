@@ -12,7 +12,7 @@ if ($activePage === 'dashboard.php') {
 
 if (isset($_SESSION['name'])) {
   $logoUrl = '/project_jwp/dashboard.php';
-  $btnUrl = 'logout.php';
+  $btnUrl = '/project_jwp/logout.php';
   $btnText = 'LOGOUT';
   $btnClass = "btn btn-danger";
 }
