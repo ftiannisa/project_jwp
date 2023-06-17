@@ -131,7 +131,7 @@ $result = $stmt->get_result();
               />
             </div>
             <div class="input-group mb-3">              
-              <textarea name="komentar_user" class="form-control form-control-lg bg-light" placeholder="Komentar..." rows="5"></textarea>
+              <textarea name="komentar_user" class="form-control form-control-lg bg-light" placeholder="Komentar..." rows="5" required></textarea>
             </div>
             <div class="input-group mb-5">
               <button name="post_komentar" class="btn btn-lg btn-warning w-100 fs-6 poppins">POST</button>
