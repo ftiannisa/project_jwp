@@ -4,22 +4,17 @@ require_once '../templates/config/db_connection.php';
 session_start();
 
 // get data artikel
-$query = "SELECT a.*, COUNT(k.id_komentar) AS jumlah_komentar, admin.nama FROM t_artikel AS a LEFT JOIN t_komentar AS k ON a.id_artikel = k.id_artikel INNER JOIN t_admin AS admin ON a.id_admin = admin.id_admin GROUP BY a.id_artikel ORDER BY jumlah_komentar DESC LIMIT 3";
+$query = "SELECT a.*, COUNT(k.id_komentar) AS jumlah_komentar, admin.nama FROM t_artikel AS a LEFT JOIN t_komentar AS k ON a.id_artikel = k.id_artikel INNER JOIN t_admin AS admin ON a.id_admin = admin.id_admin";
+
+if (isset($_POST['search'])) {
+  $keyword = $_POST['keyword'];
+  $query .= " WHERE a.judul_artikel LIKE '%{$keyword}%'";
+}
+
+$query .= " GROUP BY a.id_artikel ORDER BY a.id_artikel DESC";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
-
-// if ($result->num_rows > 0) {
-//     // delete data
-//     echo "<script>alert('DATA BERHASIL DIHAPUS')</script>";
-//     $query = "DELETE FROM t_artikel WHERE id_artikel=?";
-//     $stmt = $connection->prepare($query);
-//     $stmt->bind_param("i", $id_artikel);
-//     $stmt->execute();
-//     header("Location: ../dashboard.php");
-// } else {
-//     echo "<script>alert('GAGAL MENGHAPUS DATA')</script>";
-// }
 
 ?>
 
@@ -85,6 +80,8 @@ $result = $stmt->get_result();
               <img
                 src="<?php echo $row['gambar']; ?>"
                 class="card-img-top h-75"
+                onerror="this.onerror=null; this.src='../templates/img/picture.png';"
+                style="max-height: 300px;"
               />
               <div class="card-body">
                 <h5 class="card-title"><?php echo $row['judul_artikel']; ?></h5>

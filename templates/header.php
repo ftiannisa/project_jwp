@@ -27,9 +27,30 @@ if (isset($_SESSION['name'])) {
 
     <link rel="stylesheet" href="templates/css/style.css" />
 
+    <!-- Bootstrap Icons CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
     <!-- google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#search-logo").click(function() {
+          var input = $("#search-input");
+          input.toggle(function() {
+            input.attr("type", "search");
+          });
+
+          $("#search-submit").toggle();
+        });
+      });
+    </script>
 
     <title>Document</title>
   </head>
@@ -70,6 +91,9 @@ if (isset($_SESSION['name'])) {
             <li class="nav-item">
               <a class="nav-link" href="/project_jwp/artikel">ARTIKEL</a>
             </li>
+            <li class="nav-item" id="search-logo">
+                <i class="bi bi-search nav-link"></i>
+            </li>
             <li class="nav-item">
               <a href="" class="nav-link"></a>
             </li>
@@ -82,6 +106,15 @@ if (isset($_SESSION['name'])) {
             </li>
           </ul>
         </div>
+        <!-- search box -->
+        <form class="d-flex flex-fill justify-content-end me-5 pe-5" role="search" method="post" action="/project_jwp/artikel/index.php">
+          <div class="d-flex">
+            
+            <input id="search-input" name="keyword" class="form-control me-2" type="hidden" placeholder="Search" aria-label="Search">
+            <button name="search" id="search-submit" class="btn btn-outline-dark" type="submit" style="display: none;">Search</button>
+
+          </div>
+        </form>
       </nav>
     </header>
   </body>
