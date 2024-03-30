@@ -47,9 +47,10 @@ $result = $stmt->get_result();
       <table class="table table-warning table-striped table-hover">
         <thead>
           <tr>
-            <th scope="col" style="width: 70%">Comments</th>
+            <th scope="col" style="width: 50%">Comments</th>
             <th scope="col" style="width: 20%">User</th>
-            <th scope="col" style="width: 10%">Action</th>
+            <th scope="col" style="width: 10%">Status Tampil</th>
+            <th scope="col" style="width: 20%">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -68,11 +69,19 @@ $result = $stmt->get_result();
               </a>
             </td>
             <td><?php echo $row['nama_user']; ?></td>
+            <td><?php $status = ($row['status_tampil']) ? 'Tampil' : 'Tidak'; echo $status; ?></td>
             <td>
               <a href="./komentar/delete.php?id_komentar=<?php echo $row['id_komentar']; ?>"
-              onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                ><button name="hapus_komentar" class="btn btn-danger poppins">
+              onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                <button name="hapus_komentar" class="btn btn-danger poppins">
                   HAPUS
+                </button>
+              </a>
+              <br>
+              <a href="./komentar/update.php?id_komentar=<?php echo $row['id_komentar']; ?>"
+              onclick="return confirm('Apakah Anda yakin ingin mengubah data ini?')">
+                <button name="ubah_komentar" class="btn btn-primary btn-sm poppins m-1">
+                  Ubah Status Tampil
                 </button>
               </a>
             </td>

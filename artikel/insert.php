@@ -9,12 +9,13 @@ if (isset($_POST['upload'])) {
     $judul_post = $_POST['judul'];
     $gambar_url = $_POST['gambar'];
     $isi_artikel = $_POST['isi_artikel'];
+    $status_komentar = (int)$_POST['flexRadioDefault'];
     $id_admin = $_SESSION['id_adm'];
 
-    $query = "INSERT INTO t_artikel (judul_artikel, isi_artikel, gambar, id_admin) VALUES (?, ?, ?, ?)";
+    $query = "INSERT INTO t_artikel (judul_artikel, isi_artikel, gambar, id_admin, status_komentar) VALUES (?, ?, ?, ?, ?)";
     $stmt = $connection->prepare($query);
 
-    $stmt->bind_param("sssi", $judul_post, $isi_artikel, $gambar_url, $id_admin);
+    $stmt->bind_param("sssii", $judul_post, $isi_artikel, $gambar_url, $id_admin, $status_komentar);
 
     try {
         $stmt->execute();
@@ -90,6 +91,21 @@ if (isset($_POST['upload'])) {
             id="editor"
             name="isi_artikel"
           ></textarea>
+        </div>
+        <div class="form-group mb-3">
+          <label for="flexRadioDefault" class="poppins">Status Komentar</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="1" id="flexRadioDefault1" checked>
+            <label class="form-check-label" for="flexRadioDefault1">
+              Buka komentar
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" value="0" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Tutup komentar
+            </label>
+          </div>
         </div>
         <div class="input-group mb-5">
           <button name="upload" class="btn btn-warning fs-6 poppins">POST</button>

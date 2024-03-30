@@ -106,7 +106,7 @@ $result = $stmt->get_result();
     </div>
 
     <!-- comment section -->
-    <div class="container w-75" id="comment_section">
+    <div class="container w-75" id="comment_section" style="display:<?php $status = ($row['status_komentar']) ? 'block' : 'none'; echo $status; ?>">
       <div class="row">
         <!-- post komentar -->
         <div class="d-flex pt-2 col justify-content-start">
@@ -143,7 +143,7 @@ $result = $stmt->get_result();
         <div class="col">
 
           <?php // get comments
-          $query = "SELECT * FROM t_artikel JOIN t_komentar ON t_artikel.id_artikel = t_komentar.id_artikel WHERE t_artikel.id_artikel = ?";
+          $query = "SELECT * FROM t_artikel JOIN t_komentar ON t_artikel.id_artikel = t_komentar.id_artikel WHERE t_artikel.id_artikel = ? AND t_komentar.status_tampil = 1";
           $stmt = $connection->prepare($query);
           $stmt->bind_param("i", $id_artikel);
           $stmt->execute();
@@ -157,8 +157,8 @@ $result = $stmt->get_result();
               <div class="d-flex flex-row mb-3">
                 <i class="bi bi-person-circle me-3" style="font-size: 30px;"></i>
                 <div class="d-flex flex-column">
-                  <div class="d-inline-flex p-3 bg-warning rounded-4 text-break text-wrap" style="max-width: 500px;">' . $row['isi_komentar'] . '</div>
                   <div>' . $row['nama_user'] . ' - <span class="text-muted">' . $tanggal_baru . '</span></div>
+                  <div class="d-inline-flex p-3 bg-warning rounded-4 text-break text-wrap" style="max-width: 500px;">' . $row['isi_komentar'] . '</div>
                 </div>
               </div>
               ';

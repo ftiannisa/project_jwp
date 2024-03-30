@@ -48,9 +48,10 @@ $result = $stmt->get_result();
         <thead>
           <tr>
             <th scope="col" style="width: 10%">#</th>
-            <th scope="col" style="width: 60%">Title</th>
-            <th scope="col" style="width: 20%">Author</th>
-            <th scope="col" style="width: 10%">Action</th>
+            <th scope="col" style="width: 30%">Title</th>
+            <th scope="col" style="width: 10%">Author</th>
+            <th scope="col" style="width: 10%">Kolom Komentar</th>
+            <th scope="col" style="width: 20%">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -72,11 +73,19 @@ $result = $stmt->get_result();
               </a>
             </td>
             <td><?php echo $row['nama']; ?></td>
+            <td><?php $status = ($row['status_komentar']) ? 'Buka' : 'Tutup'; echo $status; ?></td>
             <td>
               <a href="./artikel/delete.php?id_artikel=<?php echo $row['id_artikel']; ?>"
-              onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                ><button name="hapus_post" class="btn btn-danger poppins">
+              onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                <button name="hapus_post" class="btn btn-danger poppins">
                   HAPUS
+                </button>
+              </a>
+              <br>
+              <a href="./artikel/update.php?id_artikel=<?php echo $row['id_artikel']; ?>"
+              onclick="return confirm('Apakah Anda yakin ingin mengubah data ini?')">
+                <button name="buka_tutup" class="btn btn-primary btn-sm m-1 poppins">
+                  Buka/Tutup Komentar
                 </button>
               </a>
             </td>
